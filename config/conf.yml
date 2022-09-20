@@ -1,0 +1,8 @@
+BASE:
+ test:
+  url: "https://rrwapi.renren.com"
+  url_person: "http://www.renren.com"
+# log等级
+  log_level: "debug"
+# log扩展名
+  log_extension: .log

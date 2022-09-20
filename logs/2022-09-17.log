@@ -1,0 +1,11 @@
+2022-09-17 13:37:16,105-E:\__Code\AutomationApi\RenRenWang\utils\logutil.py-DEBUG-发送post请求
+2022-09-17 13:38:44,347-root-DEBUG-发送post请求
+2022-09-17 13:38:44,350-urllib3.connectionpool-DEBUG-Starting new HTTPS connection (1): rrwapi.renren.com:443
+2022-09-17 13:38:47,518-urllib3.connectionpool-DEBUG-https://rrwapi.renren.com:443 "POST /account/v1/loginByPassword HTTP/1.1" 200 690
+2022-09-17 13:40:15,782-RequestUtil-DEBUG-发送post请求
+2022-09-17 13:40:54,532-RequestUtil-DEBUG-发送post请求
+2022-09-17 13:40:55,627-RequestUtil-DEBUG-发送post请求
+2022-09-17 13:41:03,320-RequestUtil-DEBUG-发送post请求
+2022-09-17 13:41:05,510-RequestUtil-DEBUG-发送post请求
+2022-09-17 13:41:07,455-RequestUtil-DEBUG-发送post请求
+2022-09-17 13:41:09,510-RequestUtil-DEBUG-发送post请求
