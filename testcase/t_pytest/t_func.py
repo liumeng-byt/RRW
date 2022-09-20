@@ -15,4 +15,4 @@ class TestFunc:
         print("b")
 
 if __name__ == '__main__':
-    pytest.main(["-vs","py_func.py"])
+    pytest.main(["-vs","t_func.py"])

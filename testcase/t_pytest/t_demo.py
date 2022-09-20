@@ -14,10 +14,10 @@ def test_c():
     print("test_c")
     assert fuc(4) == 6
 
+
 def test_b():
     print("test_b")
     assert 1
 #
 if __name__ == '__main__':
-    # pytest.main(["-s","test_demo.py"])
-    pytest.main(["-s"])
+    pytest.main(["-s","t_demo.py"])

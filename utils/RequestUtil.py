@@ -2,8 +2,14 @@ import requests
 
 from utils.logutil import logs
 
-
 def requests_get(url, json=None, headers=None):
+    """
+    get请求封装
+    :param url:
+    :param json:
+    :param headers:
+    :return:
+    """
     response = requests.get(url=url, json=json, headers=headers)
     code = response.status_code
     try:
@@ -19,6 +25,13 @@ def requests_get(url, json=None, headers=None):
 
 
 def requests_post(url, json=None, headers=None):
+    """
+    post请求封装
+    :param url:
+    :param json:
+    :param headers:
+    :return:
+    """
     response = requests.post(url=url, json=json, headers=headers)
     code = response.status_code
     try:
@@ -31,7 +44,12 @@ def requests_post(url, json=None, headers=None):
     response_dict["body"] = body
     return response_dict
 
+
+
 class Requests():
+    """
+    进一步封装get请求和post请求
+    """
     def __init__(self):
         self.log = logs("RequestUtil")
 

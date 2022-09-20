@@ -1,4 +1,6 @@
 import os
+
+# from utils.logutil import logs
 from utils.yamlutils import YamlRead
 
 # 获取当前文件的绝对路径
@@ -42,6 +44,7 @@ class ConfigYaml(object):
         :return:
         """
         self.url = self.config['BASE']['test']['url']
+        # logs("conf").debug("获取主页url：%s",self.url)
         return self.url
 
     def get_config_person_url(self):
@@ -50,6 +53,7 @@ class ConfigYaml(object):
         :return:
         """
         self.url = self.config['BASE']['test']['url_person']
+        # logs("conf").debug("获取个人中心url：%s", self.url)
         return self.url
 
     def get_config_loglevel(self):
@@ -58,6 +62,7 @@ class ConfigYaml(object):
         :return:
         """
         self.log_level = self.config['BASE']['test']['log_level']
+        # logs("conf").debug("获取日志级别：%s", self.log_level)
         return self.log_level
 
     def get_config_extension(self):
@@ -66,13 +71,14 @@ class ConfigYaml(object):
         :return:
         """
         self.log_extension = self.config['BASE']['test']['log_extension']
+        # logs("conf").debug("获取日志扩展名：%s", self.log_extension)
         return self.log_extension
 
 
-if __name__ == '__main__':
-    conf_read = ConfigYaml()
-    # data = conf_read.get_config_url()
-    # print(data)
-    # print(conf_read.get_config_extension())
-    # print(conf_read.get_config_loglevel())
-    pass
+# if __name__ == '__main__':
+#     conf_read = ConfigYaml()
+#     # data = conf_read.get_config_url()
+#     # print(data)
+#     # print(conf_read.get_config_extension())
+#     # print(conf_read.get_config_loglevel())
+#     pass

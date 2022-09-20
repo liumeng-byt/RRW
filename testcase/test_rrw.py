@@ -26,7 +26,7 @@ def test_login():
     }
     req_api = Requests()
     response = req_api.post_api(url, json=data, headers=headers)
-    print(response)
+    print("登录---",response)
 
 
 def test_like():
@@ -53,7 +53,7 @@ def test_like():
     }
     req_api = Requests()
     response = req_api.post_api(url=url, json=data, headers=headers)
-    print(response)
+    print("主页点赞---",response)
 
 
 def test_personal():
@@ -66,11 +66,5 @@ def test_personal():
     }
     req = Requests()
     response = req.get_api(url=url, headers=headers)
-    print(response)
+    print("个人主页---",response)
 
-
-if __name__ == '__main__':
-    # login()
-    # like()
-    # personal()
-    pytest.main()
