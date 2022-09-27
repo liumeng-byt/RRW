@@ -1,0 +1,19 @@
+path: /account/v1/loginByPassword
+data:
+ user: 15565280933
+ password: dc483e80a7a0bd9ef71d8cf973673924
+ appKey: bcceb522717c2c49f895b561fa913d10
+ sessionKey: betIJALLo2hDnkW0
+ callId: 1662873700822
+ sig: 1e8fd64c86805b25acf3be878a958bb2
+ expect_errorCode: 0
+---
+path: /account/v1/loginByPassword
+data:
+ user: 15565280933
+ password: dc111
+ appKey: bcceb522717c2c49f895b561fa913d10
+ sessionKey: betIJALLo2hDnkW0
+ callId: 1662873700822
+ sig: 1e8fd64c86805b25acf3be878a958bb2
+ expect_errorCode: 0

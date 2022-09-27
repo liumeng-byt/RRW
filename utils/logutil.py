@@ -3,7 +3,7 @@ import datetime
 import os
 
 from config import conf
-# from config.conf import get_logs_path
+
 level={
     "info":logging.INFO,
     "debug":logging.DEBUG,
@@ -37,17 +37,22 @@ class Logger:
             self.logger.addHandler(handler_console)
             self.logger.addHandler(handler_file)
 
-
-
-
+# 在yamlutils.py中导入日志方法logs使用时会报错，但是在RequestUtil.py中导入使用又不报错，只能把写死
 log_path  = conf.get_logs_path()  # logs文件夹路径
 log_extension = conf.ConfigYaml().get_config_extension()  # log扩展名
+loglevel = conf.ConfigYaml().get_config_loglevel()  # 日志级别
+
+# 在yamlutils.py中导入日志方法logs使用时会报错，但是在RequestUtil.py中导入使用又不报错，只能把写死
+# log_path= os.path.dirname(os.path.dirname(os.path.abspath(__file__)))+os.sep + "logs" # logs文件夹路径
+# log_extension = ".log"  # log扩展名
+# loglevel = "debug"  # 日志级别
+
 # current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")  # 当前时间  时间中的冒号，会报错，可以换成-
 # current_time = datetime.datetime.now().strftime("%Y-%m-%d %H-%M-%S")  # 当前时间
 current_time = datetime.datetime.now().strftime("%Y-%m-%d")  # 当前时间
 log_save_file = os.path.join(log_path,current_time+ log_extension)  # 日志文件名称
-# print(log_save_file)
-loglevel = conf.ConfigYaml().get_config_loglevel()  # 日志级别
+
+
 
 # 定义方法，返回外部使用
 def logs(log_path = __file__):

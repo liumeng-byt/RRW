@@ -8,6 +8,7 @@ import yaml
 
 class YamlRead(object):
     def __init__(self, path):
+        # self.logs = logs()
         if os.path.exists(path):
             self.path = path
         else:
@@ -18,14 +19,21 @@ class YamlRead(object):
     # 读取单段内容方法
     def yaml_read_single(self):
         if not self._data_single:
-            with open(self.path, 'r', encoding='utf-8') as f:
-                self._data_single = yaml.safe_load(f)
-                # logs("yamlutils").debug("读取了%s文件内的单段内容",self.path)
+            try:
+                with open(self.path, 'r', encoding='utf-8') as f:
+                    self._data_single = yaml.safe_load(f)
+                    # logs(__file__).debug("获取%s文件内容(单段)",self.path)
+            except Exception as e:
+                # self.logs.error("read error")
+                # self.logs.error(e)
+                print("read eroor")
+                print(e)
         return self._data_single
 
+    # 读取多段内容方法
     def yaml_read_more(self):
         if not self._data_more:
-            with open(self.path,'r',encoding='utf-8') as f:
+            with open(self.path,'r',encoding='gbk') as f:
                 self._data_more = list(yaml.safe_load_all(f))
-                # logs("yamlutils").debug("读取了%s文件内的多段内容", self.path)
+                # logs(__file__).debug("获取%s文件内的多段内容", self.path)
         return self._data_more

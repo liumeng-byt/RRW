@@ -12,7 +12,7 @@ import yaml
     # print(data)
 
 
-from utils.yamlutils import YamlRead
+from utils.yamlutil import YamlRead
 yr=YamlRead('./data.yml')
 data = yr.yaml_read_single() # 读取单个内容
 # data = yr.yaml_read_more()  # 读取多段内容
