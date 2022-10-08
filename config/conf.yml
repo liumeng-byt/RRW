@@ -6,3 +6,8 @@ BASE:
   log_level: "debug"
 # log扩展名
   log_extension: .log
+#  excel文件名及sheet名
+
+ excel:
+  excel_name: "testdata.xls"
+  sheet_by: 0

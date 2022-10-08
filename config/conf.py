@@ -28,6 +28,11 @@ _config_logs_path = PROJECT_PATH_ABSOLUTE + os.sep + "logs"
 # db_conf.yml文件路径
 _db_config_yaml_path = _config_dir_path + os.sep + "db_conf.yml"
 
+# 返回data文件夹路径
+def get_data_path():
+    return _data_dir_path
+
+
 # 返回login_data_yml路径
 def get_login_data_path():
     return _login_data_yml_path
@@ -52,8 +57,24 @@ def get_logs_path():
 
 class ConfigYaml:
     def __init__(self):
-        self.config = YamlRead(get_config_yaml()).yaml_read_single()
-        self.db_config = YamlRead(get_db_config_yaml()).yaml_read_single()
+        self.config = YamlRead(get_config_yaml()).yaml_read_single()  # 读取conf.yml
+        self.db_config = YamlRead(get_db_config_yaml()).yaml_read_single()   # 读取db_conf.yml
+
+    def get_excel_name(self):
+        """
+        返回测试用例文件名
+        :return:
+        """
+        self.excel_name =self.config['BASE']['excel']['excel_name']
+        return self.excel_name
+
+    def get_excel_sheet_by(self):
+        """
+        返回测试用例文件的sheet名称
+        :return:
+        """
+        self.sheet_by =self.config['BASE']['excel']['sheet_by']
+        return self.sheet_by
 
     def get_config_url(self):
         """
@@ -61,6 +82,7 @@ class ConfigYaml:
         :return:
         """
         self.url = self.config['BASE']['test']['url']
+        # print(self.url)
         return self.url
 
     def get_config_person_url(self):
@@ -93,3 +115,6 @@ class ConfigYaml:
         :return:
         """
         return self.db_config[db]
+
+# if __name__ == '__main__':
+#     ConfigYaml().get_excel_sheet_by()

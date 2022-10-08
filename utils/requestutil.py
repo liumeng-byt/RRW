@@ -53,13 +53,18 @@ class Requests():
     def __init__(self):
         self.log = logs(__file__)
 
+    # 传入请求方法，自动判断get或post
     def requests_api(self,url,method,headers=None,json=None,data=None):
-        if method == "get":
-            # self.log.info("发送get请求")
+        if method.lower() == "get":
+            self.log.info("发送get请求")
             response = requests.get(url=url,headers=headers,json=json,data=data)
-        elif method == "post":
-            # self.log.debug("发送post请求")
+        elif method.lower() == "post":
+            self.log.debug("发送post请求")
             response = requests.post(url=url,headers=headers,json=json,data=data)
+        else:
+            self.log.error("请求方法获取出问题")
+            return
+
         code = response.status_code
         try:
             body = response.json()
@@ -71,6 +76,8 @@ class Requests():
         response_dict["body"]=body
         return response_dict
 
+
+    # 直接选定请求方法，参数中即可不用传入请求方法
     def get_api(self,url,**kwargs):
         response = self.requests_api(url,method="get",**kwargs)
         return response
