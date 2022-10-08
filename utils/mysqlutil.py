@@ -8,8 +8,12 @@ class MysqlUtile:
     """
 
     def __init__(self, host, user, password, database, port=3306):
-        self.conn = pymysql.connect(host=host, user=user, password=password, database=database,
-                                    port=port, cursorclass=pymysql.cursors.DictCursor)
+        try:
+            self.conn = pymysql.connect(host=host, user=user, password=password, database=database,
+                                    port=int(port), cursorclass=pymysql.cursors.DictCursor)
+        except Exception as e:
+            print("数据库连接失败")
+            raise e
         self.cur = self.conn.cursor()
         self.logs = logs()
 
@@ -43,8 +47,7 @@ class MysqlUtile:
                 self.conn.commit()
         except Exception as e:
             self.conn.rollback()
-            self.logs.error("mysql 执行失败")
-            self.logs.error(e)
+            self.logs.error("提交不成功：%s"%e)
             return False
         return True
 
@@ -60,7 +63,7 @@ class MysqlUtile:
 
 
 # if __name__ == '__main__':
-#     mysql = MysqlUtile(host="127.0.0.1", user="root", password="root", database="mysql", port=3306)
+#     mysql = MysqlUtile(host="127.0.0.1", user="root", password="", database="mysql", port=3306)
 #     # res = mysql.get_fetchone("select * from tb_users")
-#     res = mysql.commit("update tb_users set is_superuser =1 WHERE username = 'yuancheng'")
+#     res = mysql.commit("create table stu2(id int ,name varchar(20),class varchar(30),age varchar(10))")
 #     print(res)
