@@ -1,4 +1,7 @@
+import subprocess
+
 from config.conf import ConfigYaml
+from utils.logutil import logs
 from utils.mysqlutil import MysqlUtile
 
 
@@ -14,7 +17,20 @@ def init_db(db_alias):
     # 初始化mysql对象
     conn = MysqlUtile(host=hsot, user=user, password=password, database=db_name, port=port)
     return conn
-    # 其他文件中调用该mysql对象即可，通过该对象调用mysql封装的方法,如下：
-    # data = conn.get_fetchone("select * from tb_users")
-    # print(data)
 
+
+def allure_report(allure_json,allure_index):
+    """
+    根据生成的json文件自动生成报告
+    :param allure_json: json文件路径
+    :param allure_index: 报告路径
+    :return:
+    """
+    # allure_cmd = "allure generate ../report/result -o ../report/html --clean"
+    allure_cmd = "allure generate %s -o %s --clean"%(allure_json,allure_index)
+    logs(__file__).info("：\nallure_json_path：%s,\nallure_index_path：%s"%(allure_json,allure_index))
+    try:
+        subprocess.call(allure_cmd, shell=True)
+    except:
+        logs(__file__).error("生成报告失败")
+        raise

@@ -1,11 +1,8 @@
 # coding=gbk
 import pymysql
 from faker import Faker
+from config.db_sql import  sql_create, sql_insert
 
-from config.conf import ConfigYaml
-from config.db_sql import sql_drop, sql_create, sql_insert
-from utils.logutil import logs
-from utils.mysqlutil import MysqlUtile
 
 
 class AddUsers():
@@ -20,7 +17,13 @@ class AddUsers():
         self.cur = self.conn.cursor()
         self.fake = Faker('zh_CN')
 
-    def create_test_datas(self):
+    def create_table(self):
+        try:
+            self.cur.execute(sql_create)
+        except Exception as e:
+            print(e)
+
+    def add_users(self):
         try:
             for j in range(100):
                 dept_id = self.fake.random_int(min=10, max=20)
@@ -44,4 +47,5 @@ class AddUsers():
 
 if __name__ == '__main__':
     res = AddUsers(host="127.0.0.1", user="root", password="", database="mysql", port=3306)
-    res.create_test_datas()
+    res.create_table()
+    res.add_users()

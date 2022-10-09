@@ -28,6 +28,28 @@ _config_logs_path = PROJECT_PATH_ABSOLUTE + os.sep + "logs"
 # db_conf.yml文件路径
 _db_config_yaml_path = _config_dir_path + os.sep + "db_conf.yml"
 
+# report文件夹路径
+_report_dir_path = PROJECT_PATH_ABSOLUTE + os.sep + "report"
+
+# report_json文件夹路径
+_report_json_path = _report_dir_path + os.sep + "json"
+
+# report_index文件夹路径
+_report_index_path = _report_dir_path + os.sep + "index"
+
+
+# 返回report文件夹路径
+def get_report_path():
+    return _report_dir_path
+
+# 返回report_json文件夹路径
+def get_report_json_path():
+    return _report_json_path
+
+# 返回report_index文件夹路径
+def get_report_index_path():
+    return _report_index_path
+
 # 返回data文件夹路径
 def get_data_path():
     return _data_dir_path

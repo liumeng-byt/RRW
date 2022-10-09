@@ -6,9 +6,10 @@ import allure
 import requests
 from requests import request
 
+from comman import base
 from comman.excelconfig import ExcelConfig
 from comman.exceldata import ExcelData
-from config.conf import ConfigYaml, get_data_path
+from config.conf import ConfigYaml, get_data_path, get_report_path, get_report_json_path, get_report_index_path
 
 # 初始化用例文件、sheet名称、日志
 from utils.assertutil import AssertUtil
@@ -76,10 +77,13 @@ class TestExcel():
         desc = "<font color='red'>请求URL: </font> {}<Br/>" \
                "<font color='red'>请求类型: </font>{}<Br/>" \
                "<font color='red'>期望结果: </font>{}<Br/>" \
-               "<font color='red'>实际结果: </font>{}".format(url, method, expect_result, response)
+               "<font color='blue'>实际结果: </font>{}".format(url, method, expect_result, response)
         allure.dynamic.description(desc)
 
 
 if __name__ == '__main__':
     # TestExcel().test_login()
     pytest.main(["-s", "test_excel_login.py"])
+    # os.system("allure generate ../report/result -o ../report/html --clean")
+    # subprocess.call("allure generate ../report/result -o ../report/html --clean", shell=True)
+    base.allure_report(get_report_json_path(),get_report_index_path())
