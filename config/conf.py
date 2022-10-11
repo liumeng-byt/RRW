@@ -82,6 +82,12 @@ class ConfigYaml:
         self.config = YamlRead(get_config_yaml()).yaml_read_single()  # 读取conf.yml
         self.db_config = YamlRead(get_db_config_yaml()).yaml_read_single()   # 读取db_conf.yml
 
+    def get_email_info(self):
+        """
+        :return: 邮箱信息
+        """
+        return self.config['email']
+
     def get_excel_name(self):
         """
         返回测试用例文件名
@@ -139,4 +145,5 @@ class ConfigYaml:
         return self.db_config[db]
 
 # if __name__ == '__main__':
-#     ConfigYaml().get_excel_sheet_by()
+#     # ConfigYaml().get_excel_sheet_by()
+#     print(ConfigYaml().get_email_info())

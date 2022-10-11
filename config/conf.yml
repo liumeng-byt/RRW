@@ -11,3 +11,11 @@ BASE:
  excel:
   excel_name: "testdata.xls"
   sheet_by: 0
+
+
+email:
+ smtpserver: "smtp.163.com"
+ username: "yls_lm@163.com"
+# password: "YLS@lm_0071"
+ authorization: "YIBCXCKZZHNENHVQ"  # 163邮箱密码登录无效，需要使用授权码
+ receiver: "yls_lm@163.com"

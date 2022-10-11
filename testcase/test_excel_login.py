@@ -28,7 +28,7 @@ log = logs(__file__)
 class TestExcel():
     @pytest.mark.parametrize("data", run_list)
     def test_login(self, data):
-        print(data)
+        # print(data)
         path = data[excel_config.path]
         url_other = ConfigYaml().get_config_url()
         url_home = ConfigYaml().get_config_person_url()
