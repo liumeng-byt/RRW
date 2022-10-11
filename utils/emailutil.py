@@ -1,13 +1,10 @@
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import smtplib
-
+from config.conf import ConfigYaml
 
 # 初始化
 # smtp地址，用户名，密码，接收邮件者，邮件标题，邮件内容，邮件附件
-from config.conf import ConfigYaml
-
-
 class SendEmail:
     def __init__(self, smtp_addr, username, authorization, recv,
                  title=None, password=None, content=None, file=None):
@@ -33,7 +30,10 @@ class SendEmail:
         # 判断是否附件
         if self.file:
             # MIMEText读取文件
-            att = MIMEText(open(self.file,"rb").read(),"base64","utf-8")
+            try:
+                att = MIMEText(open(self.file,"rb").read(),"base64","utf-8")
+            except Exception as e:
+                raise FileNotFoundError(e)
             # 设置内容类型
             att["Content-Type"] = 'application/octet-stream'
             # 设置附件头
@@ -45,17 +45,22 @@ class SendEmail:
         self.smtp = smtplib.SMTP(self.smtp_addr, port=25)
         self.smtp.login(self.username, self.authorization)
         # 发送邮件
-        self.smtp.sendmail(self.username, self.recv, msg.as_string())
+        try:
+            self.smtp.sendmail(self.username, self.recv, msg.as_string())
+        except Exception as e:
+            raise Exception(e)
+        else:
+            print("Email send successful")
 
 
-# if __name__ == "__main__":
-#     email_info = ConfigYaml().get_email_info()
-#     smtp_addr = email_info["smtpserver"]
-#     username = email_info["username"]
-#     # password = email_info["password"]
-#     authorization = email_info["authorization"]
-#     recv = email_info["receiver"]
-#     email = SendEmail(smtp_addr=smtp_addr, username=username, authorization=authorization, recv=recv, title="标题1",
-#                       content="",
-#                       file=r"E:\Code\AutomationApi\RRW\data\testdata.xls")
-#     email.send_mail()
+if __name__ == "__main__":
+    email_info = ConfigYaml().get_email_info()
+    smtp_addr = email_info["smtpserver"]
+    username = email_info["username"]
+    # password = email_info["password"]
+    authorization = email_info["authorization"]
+    recv = email_info["receiver"]
+    email = SendEmail(smtp_addr=smtp_addr, username=username, authorization=authorization, recv=recv, title="标题1",
+                      content="",
+                      file=r"E:\Code\AutomationApi\RRW\data\testdata.xls")
+    email.send_mail()
