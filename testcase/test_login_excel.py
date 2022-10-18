@@ -71,6 +71,7 @@ class TestExcel():
             headers = {}  # 默认是str，必须重新定义为dict Type
 
         response = Requests().requests_api(url=url, json=params, method=method, headers=headers)
+        print(response)
         allure.dynamic.feature(excel_sheet)  # 一级标签-sheet名称
         allure.dynamic.story(case_model)  # 二级标签-模块名称
         allure.dynamic.title(case_id + case_name)
@@ -79,11 +80,16 @@ class TestExcel():
                "<font color='red'>期望结果: </font>{}<Br/>" \
                "<font color='blue'>实际结果: </font>{}".format(url, method, expect_result, response)
         allure.dynamic.description(desc)
+        err_assert = AssertUtil()
+        try:
+            err_assert.errorcode_assert(response['body']['errorCode'], 0)
+        except Exception as e:
+            logs(__file__).error(e)
+            # raise Exception("获取类型错误",e)
+            raise e
 
-
-if __name__ == '__main__':
-    # TestExcel().test_login()
-    pytest.main(["-s", "test_excel_login.py"])
-    # os.system("allure generate ../report/result -o ../report/html --clean")
-    # subprocess.call("allure generate ../report/result -o ../report/html --clean", shell=True)
-    base.allure_report(get_report_json_path(),get_report_index_path())
+# if __name__ == '__main__':
+#     pytest.main(["-s", "test_login_excel.py"])
+#     # os.system("allure generate ../report/result -o ../report/html --clean")
+#     # subprocess.call("allure generate ../report/result -o ../report/html --clean", shell=True)
+#     base.allure_report(get_report_json_path(),get_report_index_path())  # 通过json生成html

@@ -19,4 +19,4 @@ def test_login(data):
 
 
 # if __name__ == '__main__':
-#     pytest.main(["-s","test_login.py","--html=./report/repot.html"])
+#     pytest.main(["-s","Notest_login_yml.py","--html=./report/repot.html"])

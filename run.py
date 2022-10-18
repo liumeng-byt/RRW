@@ -1,12 +1,9 @@
 import pytest
+from comman import base
+from config.conf import get_report_json_path, get_report_index_path
 
-from testcase.test_rrw import test_login, test_like, test_friends, test_message_list
+
 
 if __name__ == '__main__':
-    # test_login()
-    # test_like()
-    # test_comment()
-    # test_personal()
-    # test_message_list()
-    # pytest.main()
-    pass
+    pytest.main()
+    base.allure_report(get_report_json_path(),get_report_index_path())  # 根据json文件生成html
