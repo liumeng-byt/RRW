@@ -85,7 +85,7 @@ class TestExcel():
         except Exception as e:
             logs(__file__).error(e)
             # raise Exception("获取类型错误",e)
-            raise e
+            raise
 
 # if __name__ == '__main__':
 #     pytest.main(["-s", "test_login_excel.py"])
