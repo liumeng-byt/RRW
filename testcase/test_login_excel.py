@@ -17,11 +17,27 @@ from utils.logutil import logs
 from utils.requestutil import Requests
 
 excel_name = ConfigYaml().get_excel_name()  # excel文件名称
-excel_path = os.path.join(get_data_path(), excel_name)  # excel文件路径
+# excel_path = os.path.join(get_data_path(), excel_name)  # excel文件路径
+
+
+RRW_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+print("RRW_path",RRW_path)
+
+data_path = RRW_path+os.path.sep+"data"
+
+print("data_path:",data_path)
+
+xls_path = data_path+os.path.sep+"testdata.xls"
+print("xls_path:",xls_path)
+
+
+
+
+
 excel_sheet = ConfigYaml().get_excel_sheet_by()  # sheet名称
-run_init = ExcelData(excel_path, excel_sheet)
+run_init = ExcelData(xls_path, excel_sheet)
 run_list = run_init.get_run_case()  # 运行的用例列表
-excel_config = ExcelConfig()  # 用例属性
+excel_config = ExcelConfig()  # 属性
 log = logs(__file__)
 
 

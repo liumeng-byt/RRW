@@ -39,5 +39,5 @@ class ExcelReader(object):
         return self._data
 
 
-if __name__ == '__main__':
-    print(ExcelReader("testdata.xls", 0).excel_read())
+# if __name__ == '__main__':
+#     print(ExcelReader("testdata.xls", 0).excel_read())
