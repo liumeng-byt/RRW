@@ -28,7 +28,6 @@ log = logs(__file__)
 class TestExcel():
     @pytest.mark.parametrize("data", run_list)
     def test_login(self, data):
-        # print(data)
         path = data[excel_config.path]
         url_other = ConfigYaml().get_config_url()
         url_home = ConfigYaml().get_config_person_url()
@@ -71,7 +70,7 @@ class TestExcel():
             headers = {}  # 默认是str，必须重新定义为dict Type
 
         response = Requests().requests_api(url=url, json=params, method=method, headers=headers)
-        print(response)
+        print("第%s个接口（%s）,结果：%s:"%("xx","xx",response)) # TODO 根据参数列表获取每一次执行的结果
         allure.dynamic.feature(excel_sheet)  # 一级标签-sheet名称
         allure.dynamic.story(case_model)  # 二级标签-模块名称
         allure.dynamic.title(case_id + case_name)
