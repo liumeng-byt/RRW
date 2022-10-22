@@ -13,7 +13,7 @@ def test_login():
     url = base_url + "/account/v1/loginByPassword"
     data = {
         "user": "15565280933",
-        "password": "dc483e80a7a0bd9ef71d8cf973673924",
+        "password": "dc483e80a7a0bd9ef71d8cf973673924",  # a123456
         "appKey": "bcceb522717c2c49f895b561fa913d10",
     }
     req_api = Requests()

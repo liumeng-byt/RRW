@@ -19,7 +19,7 @@ def init_db(db_alias):
     return conn
 
 
-def allure_report(allure_json,allure_index):
+def allure_report(allure_json, allure_index):
     """
     根据生成的json文件自动生成报告
     :param allure_json: json文件路径
@@ -27,8 +27,9 @@ def allure_report(allure_json,allure_index):
     :return:
     """
     # allure_cmd = "allure generate ../report/result -o ../report/html --clean"
-    allure_cmd = "allure generate %s -o %s --clean"%(allure_json,allure_index)
-    logs(__file__).info("：\nallure_json_path：%s,\nallure_index_path：%s"%(allure_json,allure_index))
+    allure_cmd = "allure generate %s -o %s --clean" % (allure_json, allure_index)
+    print("：\nallure_json_path：%s\nallure_index_path：%s" % (allure_json, allure_index))
+    # logs(__file__).info("：\nallure_json_path：%s,\nallure_index_path：%s" % (allure_json, allure_index))
     try:
         subprocess.call(allure_cmd, shell=True)
     except:

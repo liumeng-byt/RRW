@@ -49,7 +49,7 @@ class TestExcel():
                 try:
                     params = eval(data[excel_config.params])  # 列表中嵌套字典，字典中又是str，所以请求参数需要转换为dict类型
                 except Exception as e:
-                    log.error(e)
+                    logs.error(e)
                     print("str转换为dict出错")
                     return
         else:
@@ -63,14 +63,14 @@ class TestExcel():
                 try:
                     headers = eval(data[excel_config.headers])  # 列表中嵌套字典，字典中又是str，所以请求参数需要转换为dict类型
                 except Exception as e:
-                    log.error(e)
-                    print("headers--str转换为dict出错")
+                    logs.error(e)
+                    # print("headers--str转换为dict出错")
                     return
         else:
             headers = {}  # 默认是str，必须重新定义为dict Type
-
         response = Requests().requests_api(url=url, json=params, method=method, headers=headers)
-        print("第%s个接口（%s）,结果：%s:"%("xx","xx",response)) # TODO 根据参数列表获取每一次执行的结果
+        # logs().debug("%s--%s--%s:" % (data[excel_config.case_id], data[excel_config.case_name], response))
+        print("\n->%s--%s--%s:" % (data[excel_config.case_id], data[excel_config.case_name], response))
         allure.dynamic.feature(excel_sheet)  # 一级标签-sheet名称
         allure.dynamic.story(case_model)  # 二级标签-模块名称
         allure.dynamic.title(case_id + case_name)
@@ -80,12 +80,13 @@ class TestExcel():
                "<font color='blue'>实际结果: </font>{}".format(url, method, expect_result, response)
         allure.dynamic.description(desc)
         err_assert = AssertUtil()
-        try:
-            err_assert.errorcode_assert(response['body']['errorCode'], 0)
-        except Exception as e:
-            logs(__file__).error(e)
-            # raise Exception("获取类型错误",e)
-            raise
+        err_assert.errorcode_assert(response['body']['errorCode'], 0)
+        # try:
+        #     err_assert.errorcode_assert(response['body']['errorCode'], 0)
+        # except Exception as e:
+        #     # pass
+        #     # logs(__file__).error(e)
+        #     raise
 
 # if __name__ == '__main__':
 #     pytest.main(["-s", "test_login_excel.py"])

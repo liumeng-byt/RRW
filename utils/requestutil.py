@@ -56,10 +56,10 @@ class Requests():
     # 传入请求方法，自动判断get或post
     def requests_api(self,url,method,headers=None,json=None,data=None):
         if method.lower() == "get":
-            self.log.info("发送get请求")
+            # self.log.info("发送get请求")
             response = requests.get(url=url,headers=headers,json=json,data=data)
         elif method.lower() == "post":
-            self.log.debug("发送post请求")
+            # self.log.debug("发送post请求")
             response = requests.post(url=url,headers=headers,json=json,data=data)
         else:
             self.log.error("请求方法获取出问题")
