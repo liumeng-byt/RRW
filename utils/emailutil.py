@@ -3,6 +3,7 @@ from email.mime.text import MIMEText
 import smtplib
 from config.conf import ConfigYaml
 
+
 # 初始化
 # smtp地址，用户名，密码，接收邮件者，邮件标题，邮件内容，邮件附件
 class SendEmail:
@@ -31,7 +32,7 @@ class SendEmail:
         if self.file:
             # MIMEText读取文件
             try:
-                att = MIMEText(open(self.file,"rb").read(),"base64","utf-8")
+                att = MIMEText(open(self.file, "rb").read(), "base64", "utf-8")
             except Exception as e:
                 raise FileNotFoundError(e)
             # 设置内容类型

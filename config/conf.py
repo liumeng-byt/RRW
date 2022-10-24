@@ -42,13 +42,16 @@ _report_index_path = _report_dir_path + os.sep + "index"
 def get_report_path():
     return _report_dir_path
 
+
 # 返回report_json文件夹路径
 def get_report_json_path():
     return _report_json_path
 
+
 # 返回report_index文件夹路径
 def get_report_index_path():
     return _report_index_path
+
 
 # 返回data文件夹路径
 def get_data_path():
@@ -58,6 +61,7 @@ def get_data_path():
 # 返回login_data_yml路径
 def get_login_data_path():
     return _login_data_yml_path
+
 
 # 为私有变量返回给外部
 def get_config_path():
@@ -80,7 +84,7 @@ def get_logs_path():
 class ConfigYaml:
     def __init__(self):
         self.config = YamlRead(get_config_yaml()).yaml_read_single()  # 读取conf.yml
-        self.db_config = YamlRead(get_db_config_yaml()).yaml_read_single()   # 读取db_conf.yml
+        self.db_config = YamlRead(get_db_config_yaml()).yaml_read_single()  # 读取db_conf.yml
 
     def get_email_info(self):
         """
@@ -93,7 +97,7 @@ class ConfigYaml:
         返回测试用例文件名
         :return:
         """
-        self.excel_name =self.config['BASE']['excel']['excel_name']
+        self.excel_name = self.config['BASE']['excel']['excel_name']
         return self.excel_name
 
     def get_excel_sheet_by(self):
@@ -101,7 +105,7 @@ class ConfigYaml:
         返回测试用例文件的sheet名称
         :return:
         """
-        self.sheet_by =self.config['BASE']['excel']['sheet_by']
+        self.sheet_by = self.config['BASE']['excel']['sheet_by']
         return self.sheet_by
 
     def get_config_url(self):

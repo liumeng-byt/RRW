@@ -1,4 +1,4 @@
-#encoding=utf-8
+# encoding=utf-8
 import os
 import xlrd
 
@@ -6,13 +6,15 @@ from comman.excelconfig import ExcelConfig
 from utils.logutil import logs
 from utils.excelutil import ExcelReader
 
+
 class SheetError:
     pass
 
+
 class ExcelData:
-    def __init__(self,file_name,sheet_by):
+    def __init__(self, file_name, sheet_by):
         self.log = logs(__file__)
-        self.data = ExcelReader(file_name,sheet_by).excel_read()
+        self.data = ExcelReader(file_name, sheet_by).excel_read()
 
     def get_run_case(self):
         """
@@ -44,7 +46,7 @@ class ExcelData:
 
         return all_list
 
-    def get_case_pre(self,pre):
+    def get_case_pre(self, pre):
         """
         根据前置条件，从全部测试用例中返回符合条件的测试用例
         :param pre:

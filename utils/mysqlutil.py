@@ -10,7 +10,7 @@ class MysqlUtile:
     def __init__(self, host, user, password, database, port=3306):
         try:
             self.conn = pymysql.connect(host=host, user=user, password=password, database=database,
-                                    port=int(port), cursorclass=pymysql.cursors.DictCursor)
+                                        port=int(port), cursorclass=pymysql.cursors.DictCursor)
         except Exception as e:
             print("数据库连接失败")
             raise e
@@ -47,7 +47,7 @@ class MysqlUtile:
                 self.conn.commit()
         except Exception as e:
             self.conn.rollback()
-            self.logs.error("提交不成功：%s"%e)
+            self.logs.error("提交不成功：%s" % e)
             return False
         return True
 
@@ -60,7 +60,6 @@ class MysqlUtile:
             self.conn.close()
         if self.cur is not None:
             self.cur.close()
-
 
 # if __name__ == '__main__':
 #     mysql = MysqlUtile(host="127.0.0.1", user="root", password="", database="mysql", port=3306)

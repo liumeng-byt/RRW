@@ -25,7 +25,7 @@ excel_config = ExcelConfig()  # 属性
 log = logs(__file__)
 
 
-class TestExcel():
+class TestExcel(object):
     @pytest.mark.parametrize("data", run_list)
     def test_login(self, data):
         path = data[excel_config.path]
@@ -47,7 +47,7 @@ class TestExcel():
                 params = json.loads(data[excel_config.params].strip())  # 列表中嵌套字典，字典中又是str，所以请求参数需要转换为dict类型
             except:
                 try:
-                    params = eval(data[excel_config.params])  # 列表中嵌套字典，字典中又是str，所以请求参数需要转换为dict类型
+                    params = eval(data[excel_config.params])
                 except Exception as e:
                     logs.error(e)
                     print("str转换为dict出错")
@@ -58,10 +58,10 @@ class TestExcel():
         # headers = data[excel_config.headers]
         if len(str(data[excel_config.headers])) > 0:
             try:
-                headers = json.loads(data[excel_config.headers].strip())  # 列表中嵌套字典，字典中又是str，所以请求参数需要转换为dict类型
+                headers = json.loads(data[excel_config.headers].strip())
             except:
                 try:
-                    headers = eval(data[excel_config.headers])  # 列表中嵌套字典，字典中又是str，所以请求参数需要转换为dict类型
+                    headers = eval(data[excel_config.headers])
                 except Exception as e:
                     logs.error(e)
                     # print("headers--str转换为dict出错")
