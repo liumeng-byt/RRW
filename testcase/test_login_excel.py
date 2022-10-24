@@ -13,6 +13,7 @@ from config.conf import ConfigYaml, get_data_path, get_report_path, get_report_j
 
 # 初始化用例文件、sheet名称、日志
 from utils.assertutil import AssertUtil
+from utils.colorutil import out_color
 from utils.logutil import logs
 from utils.requestutil import Requests
 
@@ -71,7 +72,7 @@ class TestExcel(object):
         response = Requests().requests_api(url=url, json=params, method=method, headers=headers)
         # logs().debug("%s--%s--%s:" % (data[excel_config.case_id], data[excel_config.case_name], response))
         data = "\n->%s--%s--%s:" % (data[excel_config.case_id], data[excel_config.case_name], response)
-        print(f'\033[34m{data}\033[0m')
+        print(out_color(data, color=34))
         allure.dynamic.feature(excel_sheet)  # 一级标签-sheet名称
         allure.dynamic.story(case_model)  # 二级标签-模块名称
         allure.dynamic.title(case_id + case_name)
