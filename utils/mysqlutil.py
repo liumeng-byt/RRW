@@ -1,6 +1,9 @@
 import pymysql
 
-from utils.logutil import logs
+from utils.logutil import Logger
+
+
+# from utils.logutil import logs
 
 
 class MysqlUtile:
@@ -15,7 +18,7 @@ class MysqlUtile:
             print("数据库连接失败")
             raise e
         self.cur = self.conn.cursor()
-        self.logs = logs()
+        self.logs = Logger.logs()
 
     def get_fetchone(self, sql):
         """

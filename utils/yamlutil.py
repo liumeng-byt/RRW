@@ -2,8 +2,9 @@ import os
 import yaml
 
 
+
 # TODO 为什么导入下面这个日志方法会报错，而在RequestUtil.py中导入又不报错
-# from utils.logutil import logs
+from utils.logutil import Logger
 
 
 class YamlRead(object):
@@ -35,5 +36,5 @@ class YamlRead(object):
         if not self._data_more:
             with open(self.path, 'r', encoding='utf-8') as f:
                 self._data_more = list(yaml.safe_load_all(f))
-                # logs(__file__).debug("获取%s文件内的多段内容", self.path)
+                Logger.logs(__file__).debug("获取%s文件内的多段内容", self.path)
         return self._data_more

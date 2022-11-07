@@ -1,11 +1,14 @@
 import json
 
-from utils.logutil import logs
+from utils.logutil import Logger
+
+
+# from utils.logutil import logs
 
 
 class AssertUtil:
     def __init__(self):
-        self.log = logs(__file__)
+        self.log = Logger.logs(__file__)
 
     def code_assert(self, response_code, expected_code):
         """

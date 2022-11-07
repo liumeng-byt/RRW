@@ -1,7 +1,8 @@
 import subprocess
 
 from config.conf import ConfigYaml
-from utils.logutil import logs
+from utils.logutil import Logger
+# from utils.logutil import logs
 from utils.mysqlutil import MysqlUtile
 
 
@@ -32,5 +33,5 @@ def allure_report(allure_json, allure_index):
     try:
         subprocess.call(allure_cmd, shell=True)
     except:
-        logs(__file__).error("生成报告失败")
+        Logger.logs(__file__).error("生成报告失败")
         raise
