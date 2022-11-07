@@ -1,16 +1,16 @@
 # -*- coding:utf-8 -*-
 
-def out_color(contant, color=31):
+def out_color(contant, color=34):
     """
     自定义颜色内容输出到控制台
-    BLACK = 30
-    RED = 31
-    GREEN = 32
-    YELLOW = 33
-    BLUE = 34
-    MAGENTA = 35
-    CYAN = 36
-    WHITE = 37
+    black = 30
+    red = 31
+    green = 32
+    yellow = 33
+    blue = 34
+    magenta = 35
+    cyan = 36
+    white = 37
     :param contant:
     :param color:
     :return:

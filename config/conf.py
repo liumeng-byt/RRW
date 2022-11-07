@@ -58,7 +58,7 @@ def get_data_path():
     return _data_dir_path
 
 
-# 返回login_data_yml路径
+# 返回login_data.yml路径
 def get_login_data_path():
     return _login_data_yml_path
 

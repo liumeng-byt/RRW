@@ -3,10 +3,6 @@ import json
 import os, pytest
 
 import allure
-import requests
-from requests import request
-
-from comman import base
 from comman.excelconfig import ExcelConfig
 from comman.exceldata import ExcelData
 from config.conf import ConfigYaml, get_data_path, get_report_path, get_report_json_path, get_report_index_path
@@ -55,8 +51,6 @@ class TestExcel(object):
                     return
         else:
             params = {}  # 默认是str，必须重新定义为dict Type
-
-        # headers = data[excel_config.headers]
         if len(str(data[excel_config.headers])) > 0:
             try:
                 headers = json.loads(data[excel_config.headers].strip())
@@ -70,32 +64,19 @@ class TestExcel(object):
         else:
             headers = {}  # 默认是str，必须重新定义为dict Type
         response = Requests().requests_api(url=url, json=params, method=method, headers=headers)
-        # logs().debug("%s--%s--%s:" % (data[excel_config.case_id], data[excel_config.case_name], response))
         data = "\n->%s--%s--%s:" % (data[excel_config.case_id], data[excel_config.case_name], response)
         print(out_color(data, color=34))
         allure.dynamic.feature(excel_sheet)  # 一级标签-sheet名称
         allure.dynamic.story(case_model)  # 二级标签-模块名称
         allure.dynamic.title(case_id + case_name)
-        # desc = "<font color='red'>请求URL: </font> {}<Br/>" \
-        #        "<font color='red'>请求类型: </font>{}<Br/>" \
-        #        "<font color='yellow'>期望结果: </font>{}<Br/>" \
-        #        "<font color='blue'>实际结果: </font>{}".format(url + "\n\n", method + "\n\n", expect_result + "\n\n",
-        #                                                        response)
-
         desc = "请求URL:{}" \
                "请求类型:{}" \
                "期望结果:{}" \
                "实际结果:{}".format(url + "\n\n", method + "\n\n", expect_result + "\n\n", response)
-
         allure.dynamic.description(desc)
         err_assert = AssertUtil()
         err_assert.errorcode_assert(response['body']['errorCode'], 0)
-        # try:
-        #     err_assert.errorcode_assert(response['body']['errorCode'], 0)
-        # except Exception as e:
-        #     # pass
-        #     # logs(__file__).error(e)
-        #     raise
+
 
 # if __name__ == '__main__':
 #     pytest.main(["-s", "test_login_excel.py"])

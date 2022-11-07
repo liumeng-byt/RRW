@@ -1,3 +1,7 @@
+#encoding=utf-8
+
+case_id: login-01
+case_name: "登录成功"
 path: /account/v1/loginByPassword
 data:
  user: 15565280933
@@ -8,6 +12,8 @@ data:
  sig: 1e8fd64c86805b25acf3be878a958bb2
  expect_errorCode: 0
 ---
+case_id: login-02
+case_name: "用户名或密码错误"
 path: /account/v1/loginByPassword
 data:
  user: 15565280933
