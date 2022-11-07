@@ -1,6 +1,9 @@
 import requests
 
-from utils.logutil import logs
+from utils.logutil import Logger
+
+
+# from utils.logutil import logs
 
 
 def requests_get(url, json=None, headers=None):
@@ -52,7 +55,7 @@ class Requests():
     """
 
     def __init__(self):
-        self.log = logs(__file__)
+        self.log = Logger.logs(__file__)
 
     # 传入请求方法，自动判断get或post
     def requests_api(self, url, method, headers=None, json=None, data=None):

@@ -13,10 +13,13 @@ level = {
 
 
 class Logger:
-    def __init__(self, log_save_file, log_read_name, log_level):
-        self.log_save_file = log_save_file
-        self.log_read_name = log_read_name
-        self.log_level = log_level
+    def __init__(self):
+        self.current_time = datetime.datetime.now().strftime("%Y-%m-%d")  # 当前时间
+        self.log_extension = conf.ConfigYaml().get_config_extension()  # log扩展名
+        self.log_path = conf.get_logs_path()  # logs文件夹路径
+        self.log_save_file = os.path.join(self.log_path, self.current_time + self.log_extension)  # 日志文件名称
+        self.log_read_name = __file__
+        self.log_level = conf.ConfigYaml().get_config_loglevel()  # 日志级别
 
         self.logger = logging.getLogger(self.log_read_name)  # 设置日志名称
         self.logger.setLevel(level[self.log_level])  # 设置日志级别
@@ -37,24 +40,9 @@ class Logger:
             self.logger.addHandler(handler_console)
             self.logger.addHandler(handler_file)
 
-    def logs(self,__file__):
-        # 在yamlutils.py中导入日志方法logs使用时会报错，但是在RequestUtil.py中导入使用又不报错，只能把写死
-        log_path = conf.get_logs_path()  # logs文件夹路径
-        log_extension = conf.ConfigYaml().get_config_extension()  # log扩展名
-        loglevel = conf.ConfigYaml().get_config_loglevel()  # 日志级别
-
-        # 在yamlutils.py中导入日志方法logs使用时会报错，但是在RequestUtil.py中导入使用又不报错，只能把写死
-        # log_path= os.path.dirname(os.path.dirname(os.path.abspath(__file__)))+os.sep + "logs" # logs文件夹路径
-        # log_extension = ".log"  # log扩展名
-        # loglevel = "debug"  # 日志级别
-
-        # current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")  # 当前时间  时间中的冒号，会报错，可以换成-
-        # current_time = datetime.datetime.now().strftime("%Y-%m-%d %H-%M-%S")  # 当前时间
-        current_time = datetime.datetime.now().strftime("%Y-%m-%d")  # 当前时间
-        log_save_file = os.path.join(log_path, current_time + log_extension)  # 日志文件名称
-
-        return Logger(log_save_file=log_save_file, log_read_name=log_path, log_level=loglevel).logger
-
+    def logs(self):
+        logs = Logger().logger
+        return logs
 
 # # 在yamlutils.py中导入日志方法logs使用时会报错，但是在RequestUtil.py中导入使用又不报错，只能把写死
 # log_path = conf.get_logs_path()  # logs文件夹路径
@@ -70,8 +58,8 @@ class Logger:
 # # current_time = datetime.datetime.now().strftime("%Y-%m-%d %H-%M-%S")  # 当前时间
 # current_time = datetime.datetime.now().strftime("%Y-%m-%d")  # 当前时间
 # log_save_file = os.path.join(log_path, current_time + log_extension)  # 日志文件名称
-#
-#
-# # 定义方法，返回外部使用
+
+
+# 定义方法，返回外部使用
 # def logs(log_path=__file__):
 #     return Logger(log_save_file=log_save_file, log_read_name=log_path, log_level=loglevel).logger
