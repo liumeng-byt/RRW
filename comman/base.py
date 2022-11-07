@@ -29,7 +29,6 @@ def allure_report(allure_json, allure_index):
     # allure_cmd = "allure generate ../report/result -o ../report/html --clean"
     allure_cmd = "allure generate %s -o %s --clean" % (allure_json, allure_index)
     print("：\nallure_json_path：%s\nallure_index_path：%s" % (allure_json, allure_index))
-    # logs(__file__).info("：\nallure_json_path：%s,\nallure_index_path：%s" % (allure_json, allure_index))
     try:
         subprocess.call(allure_cmd, shell=True)
     except:
