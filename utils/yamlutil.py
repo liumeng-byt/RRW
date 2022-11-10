@@ -35,7 +35,7 @@ class YamlRead(object):
             try:
                 with open(self.path, 'r', encoding='utf-8') as f:
                     self._data_more = list(yaml.safe_load_all(f))
-                    Logger.logs(__file__).debug("获取%s文件内的多段内容", self.path)
+                    # Logger.logs(__file__).debug("获取%s文件内的多段内容", self.path)
             except Exception as e:
                 Logger.logs(__file__).error("多段文件读取失败")
         return self._data_more
