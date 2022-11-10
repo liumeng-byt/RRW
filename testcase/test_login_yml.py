@@ -6,6 +6,7 @@ import pytest
 import requests
 
 from config.conf import get_login_data_path, ConfigYaml
+from utils.colorutil import out_color
 from utils.yamlutil import YamlRead
 
 ip = ConfigYaml().get_config_url()
@@ -17,7 +18,11 @@ class TestYaml(object):
     def test_login(self, datas):
         url = ip + datas['path']
         data = datas['data']
+        case_id = datas["case_id"]
+        case_name = datas["case_name"]
         res = requests.post(url=url, json=data)
+        result = "\n->%s--%s--%s:" % (case_id,case_name,res.json())
+        print(out_color(result,color=32))
         # TODO 以下两个插件设置后在报告中不起效
         # allure.dynamic.feature("login")  # 一级标签-sheet名称
         # allure.dynamic.story("login")  # 二级标签-模块名称
