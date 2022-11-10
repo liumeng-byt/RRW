@@ -37,7 +37,7 @@ class Logger:
             handler_file.setFormatter(formater)
 
             # 添加到hander
-            self.logger.addHandler(handler_console)
+            # self.logger.addHandler(handler_console)
             self.logger.addHandler(handler_file)
 
     def logs(self):

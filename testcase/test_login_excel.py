@@ -10,7 +10,8 @@ from config.conf import ConfigYaml, get_data_path, get_report_path, get_report_j
 # 初始化用例文件、sheet名称、日志
 from utils.assertutil import AssertUtil
 from utils.colorutil import out_color
-from utils.logutil import logs
+from utils.logutil import Logger
+# from utils.logutil import logs
 from utils.requestutil import Requests
 
 excel_name = ConfigYaml().get_excel_name()  # excel文件名称
@@ -19,12 +20,13 @@ excel_sheet = ConfigYaml().get_excel_sheet_by()  # sheet名称
 run_init = ExcelData(excel_path, excel_sheet)
 run_list = run_init.get_run_case()  # 运行的用例列表
 excel_config = ExcelConfig()  # 属性
-log = logs(__file__)
+log = Logger.logs(__file__)
 
 
 class TestExcel(object):
     @pytest.mark.parametrize("data", run_list)
     def test_login(self, data):
+        # print(data)
         path = data[excel_config.path]
         url_other = ConfigYaml().get_config_url()
         url_home = ConfigYaml().get_config_person_url()
@@ -34,6 +36,7 @@ class TestExcel(object):
         case_id = data[excel_config.case_id]
         case_name = data[excel_config.case_name]
         method = data[excel_config.method]
+        error_code = data[excel_config.errorcode]
         if data[excel_config.case_model] == "主页":
             url = url_home + path
         else:
@@ -46,7 +49,7 @@ class TestExcel(object):
                 try:
                     params = eval(data[excel_config.params])
                 except Exception as e:
-                    logs.error(e)
+                    Logger.logs(__file__).error(e)
                     print("str转换为dict出错")
                     return
         else:
@@ -58,7 +61,7 @@ class TestExcel(object):
                 try:
                     headers = eval(data[excel_config.headers])
                 except Exception as e:
-                    logs.error(e)
+                    Logger.logs(__file__).error(e)
                     # print("headers--str转换为dict出错")
                     return
         else:
@@ -75,8 +78,11 @@ class TestExcel(object):
                "实际结果:{}".format(url + "\n\n", method + "\n\n", expect_result + "\n\n", response)
         allure.dynamic.description(desc)
         err_assert = AssertUtil()
-        err_assert.errorcode_assert(response['body']['errorCode'], 0)
-
+        # if case_id in ("message_01", "like_01"):
+        if error_code is not None:
+            err_assert.errorcode_assert(response['body']['errorCode'], 0)
+        else:
+            log.error("AssertError,error_code之外的断言方法暂未设置")
 
 # if __name__ == '__main__':
 #     pytest.main(["-s", "test_login_excel.py"])

@@ -3,8 +3,8 @@ import os
 import xlrd
 
 from comman.excelconfig import ExcelConfig
-from utils.logutil import logs
 from utils.excelutil import ExcelReader
+from utils.logutil import Logger
 
 
 class SheetError:
@@ -13,7 +13,7 @@ class SheetError:
 
 class ExcelData:
     def __init__(self, file_name, sheet_by):
-        self.log = logs(__file__)
+        self.log = Logger.logs(__file__)
         self.data = ExcelReader(file_name, sheet_by).excel_read()
 
     def get_run_case(self):
@@ -30,7 +30,7 @@ class ExcelData:
                 if i[ExcelConfig.is_run].lower() == "y":
                     run_list.append(i)
             except Exception as e:
-                self.log.error(e)
+                self.log.error("参数填入错误:".format(e))
                 return "参数填入错误"
         return run_list  # 返回列表中嵌套字典，字典中又是str，所以请求参数需要转换为dict类型
 
@@ -61,5 +61,5 @@ class ExcelData:
 
 
 if __name__ == '__main__':
-    print(ExcelData("../data/testdata.xls", 0).get_all_case())
-    # ExcelData("testdata.xls", 0).excel_data()
+    print(ExcelData("../data/testdat.xls", 0).get_all_case())
+    # ExcelData("testdat.xls", 0).excel_data()

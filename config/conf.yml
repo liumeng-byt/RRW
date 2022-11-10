@@ -9,7 +9,7 @@ BASE:
 #  excel文件名及sheet名
 
  excel:
-  excel_name: "testdata.xls"
+  excel_name: "testdat.xls"
   sheet_by: 0
 
 

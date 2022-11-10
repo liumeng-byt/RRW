@@ -3,6 +3,8 @@ import os
 
 import xlrd
 
+from utils.logutil import Logger
+
 
 class SheetTypeError:
     pass
@@ -11,10 +13,12 @@ class SheetTypeError:
 class ExcelReader(object):
     def __init__(self, file_path, sheet_by):
         self._data = list()
+        self.log = Logger.logs(__file__)
         if os.path.exists(file_path):
             self.file_path = file_path
             self.sheet_by = sheet_by
         else:
+            self.log.error("文件不存在")
             raise FileNotFoundError("文件不存在")
 
     def excel_read(self):
@@ -23,6 +27,7 @@ class ExcelReader(object):
 
             if type(self.sheet_by) not in (int, str):
                 # raise SheetTypeError("输入的sheet类型不符合规则")
+                self.log.error("输入的类型不符合规则")
                 raise ("输入的类型不符合规则")
 
             # 名称或索引读取sheet
@@ -40,4 +45,4 @@ class ExcelReader(object):
         return self._data
 
 # if __name__ == '__main__':
-#     print(ExcelReader("testdata.xls", 0).excel_read())
+#     print(ExcelReader("testdat.xls", 0).excel_read())
